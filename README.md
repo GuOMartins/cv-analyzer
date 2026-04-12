@@ -36,6 +36,10 @@ O **CV Analyzer** é um pipeline completo que:
 
 ## 🎬 Demonstração
 
+[CV Analyzer em funcionamento](assets/app-demo.gif)
+
+[Resultado com score de compatibilidade](assets/resultado_score.png)
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  📤 Upload: curriculo_joao.pdf                          │
