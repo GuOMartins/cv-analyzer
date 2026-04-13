@@ -154,51 +154,114 @@ cv-analyzer/
 
 ---
 
-## 🚀 Como Rodar
+Abaixo está o texto pronto para você **copiar e colar diretamente** no seu `README.md`, substituindo a seção antiga de "Como Rodar".
 
-### ▶️ Opção 1 — Google Colab (recomendado, sem instalação)
+```markdown
+## 🚀 Como Rodar o Projeto (passo a passo)
 
-1. Clique no botão abaixo:
+### ▶️ Opção 1 — Google Colab (recomendado para quem só quer testar)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GuOMartins/cv-analyzer/blob/main/notebooks/cv_analyzer_colab.ipynb)
+> ✅ **Nenhuma instalação necessária** – tudo roda no seu navegador.
 
-2. Execute todas as células em ordem (Runtime → Run All)
-3. Clique no link gerado pelo Gradio ao final
+1. Clique no botão abaixo:  
+   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GuOMartins/cv-analyzer/blob/main/notebooks/cv_analyzer_colab.ipynb)
+
+2. No Colab, execute as células em ordem:  
+   `Runtime → Run all`
+
+3. Ao final, clique no link gerado (ex: `http://127.0.0.1:7860`) – a interface do CV Analyzer abrirá.
+
+> 💡 **Dica:** O Colab é gratuito e não precisa de computador potente.
 
 ---
 
-### 💻 Opção 2 — Ambiente Local
+### 💻 Opção 2 — Rodar no seu computador (para desenvolvedores)
 
-**Pré-requisitos:** Python 3.10+, Git
+> ⚠️ **Pré-requisito:** Ter Python 3.10 ou superior instalado.  
+> (Para verificar, digite `python --version` no terminal.)
+
+#### 1. Baixar o projeto
 
 ```bash
-# 1. Clone o repositório
 git clone https://github.com/GuOMartins/cv-analyzer.git
 cd cv-analyzer
+```
 
-# 2. Crie e ative o ambiente virtual
+#### 2. Criar e ativar um ambiente virtual (recomendado)
+
+**Criar o ambiente:**
+
+```bash
 python -m venv venv
-source venv/bin/activate        # Linux/Mac
-# venv\Scripts\activate         # Windows
+```
 
-# 3. Instale as dependências
+**Ativar o ambiente:**
+
+| Sistema | Comando |
+|---------|---------|
+| Windows | `venv\Scripts\activate` |
+| Linux / Mac | `source venv/bin/activate` |
+
+Após ativar, você verá `(venv)` no início da linha do terminal.
+
+> 💡 Para desativar depois, basta digitar `deactivate`.
+
+#### 3. Instalar as dependências
+
+```bash
 pip install -r requirements.txt
+```
 
-# 4. Instale o Tesseract OCR
-# Ubuntu/Debian:
-sudo apt-get install tesseract-ocr tesseract-ocr-por
-# Mac:
-brew install tesseract tesseract-lang
-# Windows: baixe o instalador em https://github.com/UB-Mannheim/tesseract/wiki
+#### 4. Instalar o Tesseract OCR (necessário para ler imagens)
 
-# 5. Baixe o modelo de linguagem
+| Sistema | Como instalar |
+|---------|----------------|
+| **Windows** | Baixe o instalador em [UB-Mannheim/tesseract](https://github.com/UB-Mannheim/tesseract/wiki) (ex: `tesseract-ocr-w64-setup-5.3.3.20231005.exe`). Durante a instalação, marque a opção **"Add Tesseract to PATH"**. |
+| **Linux (Ubuntu/Debian)** | `sudo apt-get install tesseract-ocr tesseract-ocr-por` |
+| **Mac** | `brew install tesseract tesseract-lang` |
+
+> 🔍 Para testar se o Tesseract foi instalado corretamente, digite `tesseract --version`.
+
+#### 5. Baixar o modelo de linguagem em português (spaCy)
+
+```bash
 python -m spacy download pt_core_news_sm
+```
 
-# 6. Inicie a aplicação
+#### 6. Iniciar a aplicação
+
+```bash
 python backend/app.py
 ```
 
-Acesse: `http://localhost:7860`
+- O Gradio iniciará um servidor local.  
+- Abra o link exibido no terminal (geralmente `http://localhost:7860`).
+
+---
+
+### 🎯 Agora é só testar!
+
+- Faça upload de um currículo (PDF ou imagem)  
+- Digite a descrição de uma vaga  
+- Clique em "Analisar" e veja o score de compatibilidade
+
+---
+
+## 📌 Resumo para os apressados (apenas comandos)
+
+```bash
+git clone https://github.com/GuOMartins/cv-analyzer.git
+cd cv-analyzer
+python -m venv venv
+venv\Scripts\activate          # Windows
+# source venv/bin/activate     # Linux/Mac
+pip install -r requirements.txt
+python -m spacy download pt_core_news_sm
+python backend/app.py
+```
+```
+
+Apenas copie todo o bloco acima e **cole no lugar da seção anterior** que falava sobre "Como Rodar". O resto do seu README permanece igual.
 
 ---
 
