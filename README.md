@@ -153,6 +153,50 @@ cv-analyzer/
 ```
 
 
+O problema principal é que você está usando **Python 3.13** (veja `cp313` nos erros). Muitas bibliotecas como `spacy` e `numpy` ainda não fornecem versões pré-compiladas (wheels) para Python 3.13 no Windows, o que força a compilação – e seu sistema não tem as ferramentas necessárias (Visual Studio Build Tools).
+
+## ✅ Solução definitiva (funciona em 5 minutos)
+
+### 1. Instale o Python 3.11 ou 3.12
+
+- Baixe o **Python 3.11** (recomendado) em [python.org/downloads](https://www.python.org/downloads/)
+- Durante a instalação, marque **"Add Python to PATH"**
+- Depois de instalar, verifique:
+  ```cmd
+  python --version
+  ```
+  Deve mostrar `Python 3.11.x` ou `3.12.x`
+
+### 2. Recrie o ambiente virtual com o Python correto
+
+Abra um **novo terminal** e execute:
+
+```cmd
+cd C:\Users\Gm22m\cv-analyzer
+rmdir /s /q venv
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 3. Instale as dependências (comandos testados e funcionais)
+
+```cmd
+python -m pip install --upgrade pip
+pip install Pillow pytesseract pdf2image nltk scikit-learn gradio python-docx numpy
+pip install spacy
+python -m spacy download pt_core_news_sm
+```
+
+### 4. Rode o projeto
+
+```cmd
+python backend/app.py
+```
+
+Pronto. O Gradio abrirá em `http://localhost:7860`.
+
+---
+
 ```markdown
 ## 🚀 Como Rodar o Projeto (passo a passo)
 
@@ -166,7 +210,7 @@ cv-analyzer/
 2. No Colab, execute as células em ordem:  
    `Runtime → Run all`
 
-3. Ao final, clique no link gerado (ex: `http://127.0.0.1:7860`) – a interface do CV Analyzer abrirá.
+3. Ao final, clique no link gerado – a interface do CV Analyzer abrirá.
 
 > 💡 **Dica:** O Colab é gratuito e não precisa de computador potente.
 
@@ -174,8 +218,10 @@ cv-analyzer/
 
 ### 💻 Opção 2 — Rodar no seu computador (para desenvolvedores)
 
-> ⚠️ **Pré-requisito:** Ter Python 3.10 ou superior instalado.  
-> (Para verificar, digite `python --version` no terminal.)
+> ⚠️ **Pré-requisitos:**  
+> - Python **3.11 ou 3.12** (evite 3.13 – muitas bibliotecas ainda não têm suporte)  
+> - Git instalado  
+> - Tesseract OCR (instruções abaixo)
 
 #### 1. Baixar o projeto
 
@@ -184,55 +230,48 @@ git clone https://github.com/GuOMartins/cv-analyzer.git
 cd cv-analyzer
 ```
 
-#### 2. Criar e ativar um ambiente virtual (recomendado)
-
-**Criar o ambiente:**
+#### 2. Criar e ativar um ambiente virtual
 
 ```bash
 python -m venv venv
 ```
 
-**Ativar o ambiente:**
-
-| Sistema | Comando |
-|---------|---------|
+| Sistema | Comando para ativar |
+|---------|---------------------|
 | Windows | `venv\Scripts\activate` |
 | Linux / Mac | `source venv/bin/activate` |
 
 Após ativar, você verá `(venv)` no início da linha do terminal.
 
-> 💡 Para desativar depois, basta digitar `deactivate`.
-
 #### 3. Instalar as dependências
 
+**Importante:** No Windows, use os comandos abaixo (funcionam com Python 3.11/3.12).  
+Se estiver no Linux/Mac, pode usar `pip install -r requirements.txt`.
+
 ```bash
-pip install -r requirements.txt
+pip install --upgrade pip
+pip install Pillow pytesseract pdf2image nltk scikit-learn gradio python-docx numpy
+pip install spacy
+python -m spacy download pt_core_news_sm
 ```
 
 #### 4. Instalar o Tesseract OCR (necessário para ler imagens)
 
 | Sistema | Como instalar |
 |---------|----------------|
-| **Windows** | Baixe o instalador em [UB-Mannheim/tesseract](https://github.com/UB-Mannheim/tesseract/wiki) (ex: `tesseract-ocr-w64-setup-5.3.3.20231005.exe`). Durante a instalação, marque a opção **"Add Tesseract to PATH"**. |
+| **Windows** | Baixe o instalador em [UB-Mannheim/tesseract](https://github.com/UB-Mannheim/tesseract/wiki) (ex: `tesseract-ocr-w64-setup-5.3.3.20231005.exe`). **Durante a instalação, marque "Add Tesseract to PATH"** |
 | **Linux (Ubuntu/Debian)** | `sudo apt-get install tesseract-ocr tesseract-ocr-por` |
 | **Mac** | `brew install tesseract tesseract-lang` |
 
-> 🔍 Para testar se o Tesseract foi instalado corretamente, digite `tesseract --version`.
+> 🔍 Teste com `tesseract --version` no terminal.
 
-#### 5. Baixar o modelo de linguagem em português (spaCy)
-
-```bash
-python -m spacy download pt_core_news_sm
-```
-
-#### 6. Iniciar a aplicação
+#### 5. Iniciar a aplicação
 
 ```bash
 python backend/app.py
 ```
 
-- O Gradio iniciará um servidor local.  
-- Abra o link exibido no terminal (geralmente `http://localhost:7860`).
+O Gradio iniciará um servidor local. Abra o link exibido (geralmente `http://localhost:7860`).
 
 ---
 
@@ -252,9 +291,34 @@ cd cv-analyzer
 python -m venv venv
 venv\Scripts\activate          # Windows
 # source venv/bin/activate     # Linux/Mac
-pip install -r requirements.txt
+pip install --upgrade pip
+pip install Pillow pytesseract pdf2image nltk scikit-learn gradio python-docx numpy
+pip install spacy
 python -m spacy download pt_core_news_sm
 python backend/app.py
+```
+```
+
+---
+
+## 🔁 Passo a passo para você testar AGORA (copie e cole)
+
+**Antes de começar:** garanta que está usando **Python 3.11 ou 3.12** (digite `python --version`). Se for 3.13, instale uma versão inferior.
+
+```cmd
+cd C:\Users\Gm22m
+rmdir /s /q cv-analyzer
+git clone https://github.com/GuOMartins/cv-analyzer.git
+cd cv-analyzer
+rmdir /s /q venv
+python -m venv venv
+venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install Pillow pytesseract pdf2image nltk scikit-learn gradio python-docx numpy
+pip install spacy
+python -m spacy download pt_core_news_sm
+python backend/app.py
+
 ```
 
 ## 📦 Dependências
