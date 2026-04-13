@@ -152,9 +152,6 @@ cv-analyzer/
 └── README.md
 ```
 
----
-
-Abaixo está o texto pronto para você **copiar e colar diretamente** no seu `README.md`, substituindo a seção antiga de "Como Rodar".
 
 ```markdown
 ## 🚀 Como Rodar o Projeto (passo a passo)
@@ -259,11 +256,6 @@ pip install -r requirements.txt
 python -m spacy download pt_core_news_sm
 python backend/app.py
 ```
-```
-
-Apenas copie todo o bloco acima e **cole no lugar da seção anterior** que falava sobre "Como Rodar". O resto do seu README permanece igual.
-
----
 
 ## 📦 Dependências
 
